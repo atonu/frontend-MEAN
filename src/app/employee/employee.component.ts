@@ -14,4 +14,8 @@ export class EmployeeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit(formData) {
+    alert('sup');
+  }
+
 }

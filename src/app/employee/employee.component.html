@@ -1,1 +1,17 @@
-<p>employee works!</p>
+<mat-card>
+  <form (submit)="onSubmit(employeeForm)" #employeeForm>
+    <mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="test"
+          name="title">
+      </mat-form-field>
+      <textarea
+        matInput
+        rows="6"
+        name="'content"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Save Post</button>
+  </form>
+</mat-card>
