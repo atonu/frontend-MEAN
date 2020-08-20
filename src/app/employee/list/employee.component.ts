@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {EmployeeService} from "../shared/employee.service";
-import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {Employee} from "../shared/employee.model";
-import {Subscription} from "rxjs";
+import {EmployeeService} from '../../shared/employee.service';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {MatTableDataSource} from '@angular/material/table';
+import {Employee} from '../../shared/employee.model';
+import {Subscription} from 'rxjs';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-employee',
@@ -30,7 +30,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.initForm();
     this.$employeeUpdate.push(this.employeeService.getEmployeeUpdate().subscribe((employee: Employee) => {
       this.getData();
-    }))
+    }));
   }
 
   initForm() {
