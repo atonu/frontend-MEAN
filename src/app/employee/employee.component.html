@@ -1,19 +1,22 @@
 <mat-card class="card">
-  <form (submit)="onSubmit(employeeForm)" #employeeForm="ngForm">
-      <mat-form-field>
-        <input
-          matInput
-          type="text"
-          placeholder="Name"
-          name="name"
-          ngModel>
-      </mat-form-field>
+  <form [formGroup]="formGroup" (submit)="onSubmit()">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Name"
+        name="name"
+        required
+        formControlName="name"
+        ngModel>
+      <mat-error *ngIf="false">lol nope</mat-error>
+    </mat-form-field>
     <mat-form-field>
       <input
         matInput
         type="text"
         placeholder="Position"
-        ngModel
+        formControlName="position"
         name="position">
     </mat-form-field>
     <mat-form-field>
@@ -21,7 +24,7 @@
         matInput
         type="text"
         placeholder="Office"
-        ngModel
+        formControlName="office"
         name="office">
     </mat-form-field>
     <mat-form-field>
@@ -29,11 +32,12 @@
         matInput
         type="text"
         placeholder="Salary"
-        ngModel
-        name="Salary">
+        formControlName="salary"
+        name="salary">
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit">Save Post</button>
+    <button mat-raised-button type="button" (click)="resetForm()">Reset Form</button>
   </form>
 </mat-card>
 
@@ -43,25 +47,33 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> name </th>
+      <th mat-header-cell *matHeaderCellDef> name</th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> position </th>
+      <th mat-header-cell *matHeaderCellDef> position</th>
       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="salary">
-      <th mat-header-cell *matHeaderCellDef> salary </th>
+      <th mat-header-cell *matHeaderCellDef> salary</th>
       <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
     </ng-container>
 
     <ng-container matColumnDef="office">
-      <th mat-header-cell *matHeaderCellDef> office </th>
+      <th mat-header-cell *matHeaderCellDef> office</th>
       <td mat-cell *matCellDef="let element"> {{element.office}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> action</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button style="margin-right: 10px" (click)="editEmployee(element)">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteEmployee(element)">Delete</button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
