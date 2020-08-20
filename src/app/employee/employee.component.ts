@@ -1,9 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {EmployeeService} from "../shared/employee.service";
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {Employee} from "../shared/employee.model";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-employee',
@@ -11,11 +12,12 @@ import {Employee} from "../shared/employee.model";
   styleUrls: ['./employee.component.scss'],
   providers: [EmployeeService]
 })
-export class EmployeeComponent implements OnInit {
+export class EmployeeComponent implements OnInit, OnDestroy {
 
   formGroup: FormGroup;
   employees: MatTableDataSource<Employee>;
   displayedColumns: string[] = ['position', 'name', 'salary', 'office', 'action'];
+  $employeeUpdate: Subscription;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
@@ -26,6 +28,9 @@ export class EmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.getData();
     this.initForm();
+    this.$employeeUpdate = this.employeeService.getEmployeeUpdate().subscribe((employee: Employee)=>{
+      this.getData();
+    })
   }
 
   initForm() {
@@ -62,12 +67,10 @@ export class EmployeeComponent implements OnInit {
     if (this.formGroup.controls['_id'].value) {
       this.employeeService.putEmployee(this.formGroup.getRawValue()).subscribe((res) => {
         this.resetForm();
-        this.getData();
       })
     } else {
       this.employeeService.postEmployee(this.formGroup.getRawValue()).subscribe((res) => {
         this.resetForm();
-        this.getData();
       })
     }
   }
@@ -85,10 +88,11 @@ export class EmployeeComponent implements OnInit {
   deleteEmployee(ev: Employee) {
     if (confirm('sure?') == true) {
       this.employeeService.deleteEmployee(ev._id).subscribe((res) => {
-        this.getData();
       })
     }
   }
 
-
+  ngOnDestroy(): void {
+    this.$employeeUpdate.unsubscribe();
+  }
 }
