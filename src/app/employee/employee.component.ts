@@ -17,7 +17,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
   employees: MatTableDataSource<Employee>;
   displayedColumns: string[] = ['position', 'name', 'salary', 'office', 'action'];
-  $employeeUpdate: Subscription;
+  private  $employeeUpdate: Subscription[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
@@ -28,9 +28,9 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getData();
     this.initForm();
-    this.$employeeUpdate = this.employeeService.getEmployeeUpdate().subscribe((employee: Employee)=>{
+    this.$employeeUpdate.push(this.employeeService.getEmployeeUpdate().subscribe((employee: Employee) => {
       this.getData();
-    })
+    }))
   }
 
   initForm() {
@@ -65,20 +65,20 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.formGroup.controls['_id'].value) {
-      this.employeeService.putEmployee(this.formGroup.getRawValue()).subscribe((res) => {
+      this.$employeeUpdate.push(this.employeeService.putEmployee(this.formGroup.getRawValue()).subscribe((res) => {
         this.resetForm();
-      })
+      }))
     } else {
-      this.employeeService.postEmployee(this.formGroup.getRawValue()).subscribe((res) => {
+      this.$employeeUpdate.push(this.employeeService.postEmployee(this.formGroup.getRawValue()).subscribe((res) => {
         this.resetForm();
-      })
+      }))
     }
   }
 
   getData() {
-    this.employeeService.getEmployeeList().subscribe((resp: Employee[]) => {
+    this.$employeeUpdate.push(this.employeeService.getEmployeeList().subscribe((resp: Employee[]) => {
       this.employees = new MatTableDataSource<Employee>(resp);
-    })
+    }))
   }
 
   editEmployee(ev: Employee) {
@@ -87,12 +87,14 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   deleteEmployee(ev: Employee) {
     if (confirm('sure?') == true) {
-      this.employeeService.deleteEmployee(ev._id).subscribe((res) => {
-      })
+      this.$employeeUpdate.push(this.employeeService.deleteEmployee(ev._id).subscribe((res) => {
+      }))
     }
   }
 
   ngOnDestroy(): void {
-    this.$employeeUpdate.unsubscribe();
+    this.$employeeUpdate.forEach(item => {
+      item.unsubscribe();
+    })
   }
 }
