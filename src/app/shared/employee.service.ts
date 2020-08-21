@@ -3,6 +3,7 @@ import {Employee} from "./employee.model";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Subject} from "rxjs";
+import {BaseUrl} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import {Subject} from "rxjs";
 export class EmployeeService {
   selectedEmployee: Employee;
   employees: Employee[];
-  readonly baseURL = "http://localhost:3000/employees"
+  readonly baseURL =  BaseUrl['nodeApi']+"/employees"
 
   constructor(private  http: HttpClient) {
   }
