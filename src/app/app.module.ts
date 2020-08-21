@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import {FormBuilder} from "@angular/forms";
-import {EmployeeModule} from './employee/employee.module';
-import { EmployeeRoutingModule } from './employee/employee-routing.module';
+import {FormBuilder, FormsModule} from "@angular/forms";
 import {AppRoutingModule} from './app-routing.module';
+import {BrowserModule} from "@angular/platform-browser";
+import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -12,10 +12,10 @@ import {AppRoutingModule} from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    EmployeeModule,
-    EmployeeRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
     AppRoutingModule
-
   ],
   providers: [
     FormBuilder
