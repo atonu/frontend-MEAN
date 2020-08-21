@@ -18,6 +18,7 @@ import {LiveComponent} from './live/live.component';
 import {BaseComponent} from './base/base.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -44,9 +45,11 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     MatTableModule,
     MatTabsModule,
     MatButtonToggleModule,
-
+    FlexLayoutModule
   ],
-  providers: [EmployeeService]
+  providers: [EmployeeService],
+  exports: [
+  ]
 })
 export class EmployeeModule {
 }
