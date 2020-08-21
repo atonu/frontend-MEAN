@@ -53,7 +53,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     })
   }
 
-  resetForm() {
+  /*resetForm() {
     this.formGroup.setValue({
       _id: "",
       name: "",
@@ -73,7 +73,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
         this.resetForm();
       }))
     }
-  }
+  }*/
 
   getData() {
     this.$employeeUpdate.push(this.employeeService.getEmployeeList().subscribe((resp: Employee[]) => {
