@@ -17,12 +17,12 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
   employees: MatTableDataSource<Employee>;
   displayedColumns: string[] = ['position', 'name', 'salary', 'office', 'action'];
-  private  $employeeUpdate: Subscription[] = [];
+  private $employeeUpdate: Subscription[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
-    private  formBuilder: FormBuilder,
-    private  employeeService: EmployeeService) {
+    private formBuilder: FormBuilder,
+    private employeeService: EmployeeService) {
   }
 
   ngOnInit(): void {

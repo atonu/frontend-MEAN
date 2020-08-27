@@ -9,12 +9,12 @@ import {EmployeeService} from "../../shared/employee.service";
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit, OnDestroy {
-  private  $employeeUpdate: Subscription[] = [];
+  private $employeeUpdate: Subscription[] = [];
   formGroup: FormGroup;
 
   constructor(
-    private  formBuilder: FormBuilder,
-    private  employeeService: EmployeeService) {
+    private formBuilder: FormBuilder,
+    private employeeService: EmployeeService) {
   }
 
   ngOnInit(): void {
@@ -52,6 +52,7 @@ export class FormComponent implements OnInit, OnDestroy {
       salary: "",
     })
   }
+
   ngOnDestroy(): void {
     this.$employeeUpdate.forEach(item => {
       item.unsubscribe();

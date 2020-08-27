@@ -5,13 +5,12 @@ import {map} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {BaseUrl} from "../../environments/environment";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EmployeeService {
   selectedEmployee: Employee;
   employees: Employee[];
-  readonly baseURL =  BaseUrl['nodeApi']+"/employees"
+  readonly baseURL =  BaseUrl['nodeApi']+"/employees";
+  public x =0;
 
   constructor(private  http: HttpClient) {
   }
