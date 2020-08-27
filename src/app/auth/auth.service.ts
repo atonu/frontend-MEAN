@@ -21,10 +21,23 @@ export class AuthService {
       );
   }
 
+  getAccessToken(){
+    return localStorage.getItem('x-access-token');
+  }
+  getRefreshToken(){
+    return localStorage.getItem('x-refresh-token');
+  }
+  setAccessToken(accessToken){
+    localStorage.setItem('x-access-token',accessToken);
+  }
+  setRefreshToken(refreshToken){
+    localStorage.setItem('x-refresh-token',refreshToken);
+  }
+
   private static setSession(userId: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('user-id', userId);
     localStorage.setItem('access-token', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
+    localStorage.setItem('refresh-Token', refreshToken);
   }
 
   removeSession() {

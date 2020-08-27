@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.authService.login(this.formGroup.controls['email'].value, this.formGroup.controls['password'].value).subscribe((resp)=> {
-      console.log(`Login successful| ${resp}`);
+      console.log('Login successful');
+      console.log(resp);
     })
   }
 
