@@ -23,11 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.formGroup = this.formBuilder.group({
-      _id: new FormControl('', []),
-      name: new FormControl('', []),
-      office: new FormControl('', []),
-      salary: new FormControl('', []),
-      position: new FormControl('', [])
+      email: new FormControl('', []),
+      password: new FormControl('', [])
     })
   }
 
@@ -45,11 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   resetForm() {
     this.formGroup.setValue({
-      _id: "",
-      name: "",
-      position: "",
-      office: "",
-      salary: "",
+      email: "",
+      password: ""
     })
   }
 
