@@ -11,6 +11,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {MatListModule} from "@angular/material/list";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {WebReqInterceptor} from "../auth/web-request-interceptor.service";
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     MatListModule,
     MatSidenavModule
   ],
-  providers: [EmployeeService],
+  providers: [EmployeeService,
+    {provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true}
+  ],
   exports: [
   ]
 })

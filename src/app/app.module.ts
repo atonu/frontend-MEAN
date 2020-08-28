@@ -26,8 +26,8 @@ import {WebReqInterceptor} from "./auth/web-request-interceptor.service";
     ],
   providers: [
     FormBuilder,
-    WebReqInterceptor
-    // {provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true}
+    // WebReqInterceptor
+    {provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

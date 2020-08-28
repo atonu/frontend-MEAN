@@ -5,7 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Employee} from '../../shared/employee.model';
 import {Subscription} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
-import {Router} from "@angular/router";
 import {AuthService} from "../../auth/auth.service";
 
 @Component({
@@ -24,7 +23,6 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private authService: AuthService,
     private employeeService: EmployeeService) {
   }
@@ -61,16 +59,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.employeeService.getEmployeeList().subscribe((resp: Employee[]) => {
       this.employees = new MatTableDataSource<Employee>(resp);
     }, error => {
-      if (error.status === 401) {
-        this.authService.getNewAccessToken().subscribe(resp => {
-          if (resp.status === 200) {
-            this.getData();
-          } else {
-            this.router.navigateByUrl('/login');
-          }
-        }, error => {
-        });
-      }
+      console.log(error);
     })
   }
 
