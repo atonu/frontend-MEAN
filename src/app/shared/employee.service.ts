@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {BaseUrl} from "../../environments/environment";
+import {AuthService} from "../auth/auth.service";
 
 @Injectable()
 export class EmployeeService {
@@ -12,7 +13,8 @@ export class EmployeeService {
   readonly baseURL =  BaseUrl['nodeApi']+"/employees";
   public x =0;
 
-  constructor(private  http: HttpClient) {
+  constructor(private  http: HttpClient,
+              private authService: AuthService) {
   }
 
   private employeeUpdate = new Subject<Employee>();
@@ -36,8 +38,10 @@ export class EmployeeService {
   }
 
   getEmployeeList() {
-    return this.http.get(this.baseURL).pipe(map(resp => {
+    return this.http.get(this.baseURL,{headers: {'x-access-token': this.authService.getAccessToken()}}).pipe(map(resp => {
       return resp;
+    },error=> {
+      console.log(error)
     }));
   }
 

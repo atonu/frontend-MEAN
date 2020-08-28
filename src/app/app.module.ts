@@ -3,11 +3,12 @@ import { AppComponent } from './app.component';
 import {FormBuilder, FormsModule} from "@angular/forms";
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserModule} from "@angular/platform-browser";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthModule} from "./auth/auth.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { LayoutComponent } from './layout/layout.component';
+import {WebReqInterceptor} from "./auth/web-request-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { LayoutComponent } from './layout/layout.component';
         MatSidenavModule
     ],
   providers: [
-    FormBuilder
+    FormBuilder,
+    WebReqInterceptor
+    // {provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
