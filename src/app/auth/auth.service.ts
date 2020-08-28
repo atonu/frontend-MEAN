@@ -36,13 +36,14 @@ export class AuthService {
 
   private static setSession(userId: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('user-id', userId);
-    localStorage.setItem('access-token', accessToken);
-    localStorage.setItem('refresh-Token', refreshToken);
+    localStorage.setItem('x-access-token', accessToken);
+    localStorage.setItem('x-refresh-token', refreshToken);
   }
 
   removeSession() {
     localStorage.removeItem('user-id');
-    localStorage.removeItem('access-token');
-    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('x-access-token');
+    localStorage.removeItem('x-refresh-token');
+    console.log('removed session')
   }
 }

@@ -1,5 +1,5 @@
 <mat-card class="card">
-  <table style="width: 100%" mat-table [dataSource]="employees">
+  <table style="width: 100%; margin-bottom: 60px" mat-table [dataSource]="employees">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
@@ -25,10 +25,18 @@
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> action</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <div fxLayoutAlign="end center">
+          <div style="padding-right: 47px">action</div>
+        </div>
+      </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button style="margin-right: 10px" (click)="editEmployee(element)">Edit</button>
-        <button mat-raised-button color="warn" (click)="deleteEmployee(element)">Delete</button>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button mat-flat-button style="margin-right: 10px" (click)="editEmployee(element)">Edit<mat-icon class="material-icons-outlined" style="font-size: 18px">edit</mat-icon></button>
+          <mat-icon aria-hidden="false" color="warn" aria-label="delete" (click)="deleteEmployee(element)">delete_outline</mat-icon>
+
+        </div>
+
       </td>
     </ng-container>
 
@@ -36,5 +44,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
+  <mat-divider></mat-divider>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </mat-card>

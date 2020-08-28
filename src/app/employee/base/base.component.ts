@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-base',
@@ -7,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-    console.log('muhahahah');
+  constructor(private authService: AuthService,
+              private  router: Router) {
   }
 
+  ngOnInit(): void {
+  }
+
+  logout() {
+    this.authService.removeSession();
+    this.router.navigate(['/login']);
+  }
 }
