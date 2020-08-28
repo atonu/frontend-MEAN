@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {EmployeeComponent} from './list/employee.component';
 import {BaseComponent} from "./base/base.component";
