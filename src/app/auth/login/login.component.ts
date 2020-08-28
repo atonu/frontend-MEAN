@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private authService: AuthService) {
   }
 
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(this.formGroup.controls['email'].value, this.formGroup.controls['password'].value).subscribe((resp)=> {
       console.log('Login successful');
       console.log(resp);
+      this.router.navigate(['./employee']);
     })
   }
 
