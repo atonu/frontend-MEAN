@@ -10,6 +10,7 @@ import {MaterialModule} from "../shared/material/material.module";
 import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {MatListModule} from "@angular/material/list";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {MatListModule} from "@angular/material/list";
     MaterialModule,
     MatSelectModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatSidenavModule
   ],
   providers: [EmployeeService],
   exports: [

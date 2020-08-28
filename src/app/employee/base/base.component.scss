@@ -4,13 +4,17 @@ mat-button-toggle-group {
 .align{
   height: 100%;
   background: linear-gradient(90deg, rgba(216,214,250,1) 0%, rgba(128,241,247,1) 49%, rgba(128,227,247,1) 100%);
-}
+  }
 
-mat-card{
-  background-color: rgba(230, 231, 249, 0.48);
+mat-sidenav-container{
+  background-color: white;
   border-radius: 0;
-  box-shadow: rgba(184,185,199,0.48);
   height: 50px;
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  box-shadow: 8px 6px 4px -2px rgba(0,0,0,0.12);
 }
 /*button {
   background-color: rgba(245,253,255,0);
@@ -20,4 +24,9 @@ button:hover{
 }*/
 mat-select{
   margin-right: 10px;
+  padding: 10px
+}
+
+mat-option{
+  padding: 0;
 }
