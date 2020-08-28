@@ -5,6 +5,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Employee} from '../../shared/employee.model';
 import {Subscription} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
+import {Router} from "@angular/router";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-employee',
@@ -22,6 +24,8 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
     private employeeService: EmployeeService) {
   }
 
@@ -53,34 +57,20 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     })
   }
 
-  /*resetForm() {
-    this.formGroup.setValue({
-      _id: "",
-      name: "",
-      position: "",
-      office: "",
-      salary: "",
-    })
-  }
-
-  onSubmit() {
-    if (this.formGroup.controls['_id'].value) {
-      this.$employeeUpdate.push(this.employeeService.putEmployee(this.formGroup.getRawValue()).subscribe((res) => {
-        this.resetForm();
-      }))
-    } else {
-      this.$employeeUpdate.push(this.employeeService.postEmployee(this.formGroup.getRawValue()).subscribe((res) => {
-        this.resetForm();
-      }))
-    }
-  }*/
-
   getData() {
     this.employeeService.getEmployeeList().subscribe((resp: Employee[]) => {
-      console.log(resp);
       this.employees = new MatTableDataSource<Employee>(resp);
-    },error => {
-      console.log(error);
+    }, error => {
+      if (error.status === 401) {
+        this.authService.getNewAccessToken().subscribe(resp => {
+          if (resp.status === 200) {
+            this.getData();
+          } else {
+            this.router.navigateByUrl('/login');
+          }
+        }, error => {
+        });
+      }
     })
   }
 
