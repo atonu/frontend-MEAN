@@ -17,7 +17,6 @@ export class BaseComponent implements OnInit {
   }
 
   logout() {
-    this.authService.removeSession();
-    this.router.navigate(['/login']);
+    this.authService.logout();
   }
 }

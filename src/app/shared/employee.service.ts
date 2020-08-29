@@ -10,8 +10,8 @@ import {AuthService} from "../auth/auth.service";
 export class EmployeeService {
   selectedEmployee: Employee;
   employees: Employee[];
-  readonly baseURL =  BaseUrl['nodeApi']+"/employees";
-  public x =0;
+  readonly baseURL = BaseUrl['nodeApi'] + "/employees";
+  public x = 0;
 
   constructor(private  http: HttpClient,
               private authService: AuthService) {
@@ -26,7 +26,7 @@ export class EmployeeService {
     }));
   }
 
-  getEmployeeUpdate(){
+  getEmployeeUpdate() {
     return this.employeeUpdate.asObservable();
   }
 
@@ -38,15 +38,14 @@ export class EmployeeService {
   }
 
   getEmployeeList() {
-    return this.http.get(this.baseURL,{headers: {'x-access-token': this.authService.getAccessToken()}}).pipe(map(resp => {
+    return this.http.get(this.baseURL, {headers: {'x-access-token': this.authService.getAccessToken() || ''}}).pipe(map(resp => {
+      console.log(resp);
       return resp;
-    },error=> {
-      console.log(error)
     }));
   }
 
   deleteEmployee(id: string) {
-    return this.http.delete(this.baseURL + `/${id}`).pipe(map((resp:Employee) => {
+    return this.http.delete(this.baseURL + `/${id}`).pipe(map((resp: Employee) => {
       this.employeeUpdate.next(resp);
     }));
   }

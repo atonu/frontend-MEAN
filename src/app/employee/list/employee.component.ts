@@ -57,6 +57,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   getData() {
     this.employeeService.getEmployeeList().subscribe((resp: Employee[]) => {
+      console.log(resp);
       this.employees = new MatTableDataSource<Employee>(resp);
     }, error => {
       console.log(error);

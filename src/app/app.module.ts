@@ -5,7 +5,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {BrowserModule} from "@angular/platform-browser";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {AuthModule} from "./auth/auth.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { LayoutComponent } from './layout/layout.component';
 import {WebReqInterceptor} from "./auth/web-request-interceptor.service";
@@ -21,7 +20,6 @@ import {WebReqInterceptor} from "./auth/web-request-interceptor.service";
         FormsModule,
         HttpClientModule,
         AppRoutingModule,
-        AuthModule,
         MatSidenavModule
     ],
   providers: [

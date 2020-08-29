@@ -18,9 +18,8 @@ export class WebReqInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     // Handle the request
+    // console.log('http interceptor');
     request = this.addAuthHeader(request);
-        console.log('error');
-
     // call next() and handle the response
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {

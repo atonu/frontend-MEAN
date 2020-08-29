@@ -1,1 +1,26 @@
-<p>register works!</p>
+<mat-card class="card">
+  <form [formGroup]="formGroup" (submit)="onSubmit()">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Email"
+        name="email"
+        required
+        formControlName="email">
+      <mat-error *ngIf="false">lol nope</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+        name="position">
+    </mat-form-field>
+    <div class="dock" fxLayout="row" fxLayoutAlign="space-between center">
+      <h3 type="button" style="margin-left: 10px" [routerLink]="'auth/login'">Already have an account? Sing in!</h3>
+      <button mat-raised-button color="primary" type="submit">Signup</button>
+    </div>
+  </form>
+</mat-card>

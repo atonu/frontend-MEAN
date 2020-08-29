@@ -26,7 +26,9 @@ export class AuthService {
   }
 
   getAccessToken() {
-    return localStorage.getItem('x-access-token');
+    let x = localStorage.getItem('x-access-token');
+    console.log(x);
+    return x;
   }
 
   getRefreshToken() {
@@ -59,13 +61,13 @@ export class AuthService {
 
   logout() {
     this.removeSession();
-    this.router.navigateByUrl('./login');
+    this.router.navigate(['/auth/login']);
   }
 
   getNewAccessToken() {
     return this.http.get(`${this.baseUrl}/getAccessToken`, {
       headers: {
-        'x-refresh-token': this.getRefreshToken(),
+        'x-refresh-token': this.getRefreshToken() || '',
         '_id': this.getUserId()
       },
       observe: 'response'
