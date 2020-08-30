@@ -6,13 +6,11 @@ import {Subject} from "rxjs";
 import {BaseUrl} from "../../environments/environment";
 import {AuthService} from "../auth/auth.service";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class EmployeeService {
   selectedEmployee: Employee;
   employees: Employee[];
   readonly baseURL = BaseUrl['nodeApi'] + "/employees";
-  public x = 0;
-
   constructor(private  http: HttpClient,
               private authService: AuthService) {
   }

@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { LayoutComponent } from './layout/layout.component';
 import {WebReqInterceptor} from "./auth/web-request-interceptor.service";
+import {EmployeeService} from "./shared/employee.service";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {WebReqInterceptor} from "./auth/web-request-interceptor.service";
     ],
   providers: [
     FormBuilder,
+    EmployeeService,
     // WebReqInterceptor
     {provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true}
   ],

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {EmployeeComponent} from './list/employee.component';
-import {EmployeeService} from '../shared/employee.service';
 import {EmployeeRoutingModule, routes} from './employee-routing.module';
 import {FormComponent} from './form/form.component';
 import {LiveComponent} from './live/live.component';
@@ -31,7 +30,7 @@ import {WebReqInterceptor} from "../auth/web-request-interceptor.service";
     MatListModule,
     MatSidenavModule
   ],
-  providers: [EmployeeService,
+  providers: [
     {provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true}
   ],
   exports: [

@@ -1,2 +1,2 @@
-<app-form></app-form>
-<app-employee></app-employee>
+<app-form [update]="employeeUpdate"></app-form>
+<app-employee (action)="processAction($event)"></app-employee>

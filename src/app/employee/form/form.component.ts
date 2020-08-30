@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Subject, Subscription} from "rxjs";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {EmployeeService} from "../../shared/employee.service";
+import {Employee} from "../../shared/employee.model";
 
 @Component({
   selector: 'app-form',
@@ -11,6 +12,8 @@ import {EmployeeService} from "../../shared/employee.service";
 export class FormComponent implements OnInit, OnDestroy {
   private $employeeUpdate: Subscription[] = [];
   formGroup: FormGroup;
+  @Input() update = new Subject<Employee>();
+  $subscribeUpdate = new Subscription();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,6 +22,10 @@ export class FormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
+    this.update.subscribe((employee: Employee)=> {
+      console.log(employee);
+      this.setFormValue(employee);
+    })
   }
 
   initForm() {
@@ -30,6 +37,16 @@ export class FormComponent implements OnInit, OnDestroy {
       position: new FormControl('', [])
     })
   }
+  setFormValue(res: Employee){
+    this.formGroup.patchValue({
+      _id: res._id,
+      name: res.name,
+      office: res.office,
+      salary: res.salary,
+      position: res.position
+    })
+  }
+
 
   onSubmit() {
     if (this.formGroup.controls['_id'].value) {
