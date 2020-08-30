@@ -32,13 +32,8 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     })
   }
-
-  test() {
-    console.log(this.formGroup.controls['email']);
-  }
-
   onSubmit() {
-    /* this.authService.register(
+     this.authService.register(
        this.formGroup.controls['name'].value,
        this.formGroup.controls['email'].value,
        this.formGroup.controls['phone'].value,
@@ -47,7 +42,7 @@ export class RegisterComponent implements OnInit {
        console.log('Login successful');
        console.log(resp);
        this.router.navigate(['./employee']);
-     })*/
+     })
   }
 
 
