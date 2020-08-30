@@ -31,6 +31,7 @@ export class WebReqInterceptor implements HttpInterceptor {
             .pipe(
               switchMap(() => {
                 request = this.addAuthHeader(request);
+                console.log(request);
                 return next.handle(request);
               }),
               catchError((err: any) => {

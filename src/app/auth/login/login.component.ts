@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {AuthService} from "../auth.service";
 import {Router} from "@angular/router";
@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.formGroup = this.formBuilder.group({
-      email: new FormControl('', []),
-      password: new FormControl('', [])
+      email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      password: new FormControl('', [Validators.required])
     })
   }
 

@@ -4,11 +4,33 @@
       <input
         matInput
         type="text"
+        placeholder="Name"
+        name="name"
+        required
+        formControlName="name">
+      <mat-error>Please provide a valid Name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
         placeholder="Email"
         name="email"
         required
+        (ngModelChange)="test()"
+        (change)="test()"
         formControlName="email">
-      <mat-error *ngIf="false">lol nope</mat-error>
+      <mat-error>Please provide a valid Email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Phone"
+        name="phone"
+        required
+        formControlName="phone">
+      <mat-error>Please provide a valid phone number</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
@@ -16,11 +38,13 @@
         type="password"
         placeholder="Password"
         formControlName="password"
+        required
         name="position">
+      <mat-error>Please provide a valid password</mat-error>
     </mat-form-field>
     <div class="dock" fxLayout="row" fxLayoutAlign="space-between center">
       <h3 type="button" style="margin-left: 10px" [routerLink]="'auth/login'">Already have an account? Sing in!</h3>
-      <button mat-raised-button color="primary" type="submit">Signup</button>
+      <button [disabled]="formGroup.invalid" mat-raised-button color="primary" type="submit">Sign up</button>
     </div>
   </form>
 </mat-card>

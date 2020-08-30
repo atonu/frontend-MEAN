@@ -8,7 +8,7 @@
         name="email"
         required
         formControlName="email">
-      <mat-error *ngIf="false">lol nope</mat-error>
+      <mat-error >Please provide a valid email</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
@@ -16,7 +16,9 @@
         type="password"
         placeholder="Password"
         formControlName="password"
+        required
         name="position">
+      <mat-error >Please provide a valid password</mat-error>
     </mat-form-field>
     <div class="dock" fxLayout="row" fxLayoutAlign="space-between center">
       <h3 type="button" style="margin-left: 10px" [routerLink]="'/auth/registration'">Not registered? Sing up!</h3>

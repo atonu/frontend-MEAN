@@ -25,6 +25,15 @@ export class AuthService {
       );
   }
 
+  register(name: string, email: string, phone: string, password: string) {
+    return this.webService.register(name, email, phone, password)
+      .pipe(shareReplay(),
+        tap((res: HttpResponse<any>) => {
+          AuthService.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        })
+      );
+  }
+
   getAccessToken() {
     let x = localStorage.getItem('x-access-token');
     console.log(x);
@@ -55,6 +64,7 @@ export class AuthService {
     localStorage.removeItem('x-refresh-token');
     console.log('removed session')
   }
+
   getUserId() {
     return localStorage.getItem('user-id');
   }
